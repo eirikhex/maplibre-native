@@ -34,6 +34,7 @@
 ### 🐞 Bug fixes
 
 - *...Add new stuff here...*
+- [OpenGL] Re-bind the shader program for every drawable instead of comparing against the cached program id, which ignored the dirty flag set by `setDirtyState()` in shared-context mode. Styles whose only drawn layer was a raster layer rendered black from the second frame on in embedders that share the GL context, e.g. Qt Quick ([maplibre-native-qt#279](https://github.com/maplibre/maplibre-native-qt/issues/279)).
 - [OpenGL] Fix invisible raster layers on Adreno 3xx by avoiding an in-place alpha assignment in the fragment shader.
 - [core] Draw numbers and short uppercase codes upright in vertical CJK line labels ([#4565](https://github.com/maplibre/maplibre-native/issues/4565)), compat to [maplibre-gl-js#8205](https://github.com/maplibre/maplibre-gl-js/pull/8205).
 - [core] Fix `ImageSource` not rendering across world copies ([#4508](https://github.com/maplibre/maplibre-native/issues/4508)).

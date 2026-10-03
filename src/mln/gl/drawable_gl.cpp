@@ -31,10 +31,9 @@ void DrawableGL::draw(PaintParameters& parameters) const {
     auto& context = static_cast<gl::Context&>(parameters.context);
 
     if (shader) {
+        // Assign unconditionally: `State::operator=` honours the dirty flag set by `setDirtyState()`.
         const auto& shaderGL = static_cast<const ShaderProgramGL&>(*shader);
-        if (shaderGL.getGLProgramID() != context.program.getCurrentValue()) {
-            context.program = shaderGL.getGLProgramID();
-        }
+        context.program = shaderGL.getGLProgramID();
     }
     if (!shader || context.program.getCurrentValue() == 0) {
         mln::Log::Warning(Event::General, "Missing shader for drawable " + util::toString(getID()) + "/" + getName());
